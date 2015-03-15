@@ -2,13 +2,14 @@ from gmusicapi import Mobileclient
 import sys
 from datetime import datetime
 import time
+import logging
 
 # CONSTANTS
 HOURS_INTERVAL = 1 # Will run every hour
 RATING_DOWNVOTE = "1"
 CONFIG_FILE_NAME = ".google_play_music_cleaner_config"
 
-
+logging.basicConfig(filename='log.txt',level=logging.INFO, format="%(asctime)s %(levelname)s %(module)s %(message)s", datefmt='%Y-%m-%d %H:%M:%S %Z')
 api = Mobileclient()
 global last_login_data
 global logged_in
@@ -29,24 +30,33 @@ def perform_iteration():
 		api.logout()
 		logged_in = api.login(curr_login_data[0], curr_login_data[1])
 	
-	print "--"
-	print datetime.now()
+	logging.info("Started iteration")
+	#print "--"
+	#print datetime.now()
 
 	if not logged_in:
-		print "Error: could not log in."
+		logging.error("Error: could not log in.")
+		#print "Error: could not log in."
 		return
 	
 	all_songs = api.get_all_songs()
 	downvoted_songs = [song for song in all_songs if song["rating"]  == RATING_DOWNVOTE]
 	
 	if len(downvoted_songs) == 0:
-		print "No downvoted songs"
+		logging.info("No downvoted songs")
+		#print "No downvoted songs"
 	else:
-		print "Deleting %s downvoted songs:" % len(downvoted_songs)
+		logging.info("Deleting %s downvoted songs:", len(downvoted_songs))
+		#print "Deleting %s downvoted songs:" % len(downvoted_songs)
 		for song in downvoted_songs:
-			print "%s - %s" % (song["artist"], song["title"])
+			logging.info("%s - %s", song["artist"], song["title"])
+			#print "%s - %s" % (song["artist"], song["title"])
 		api.delete_songs([song["id"] for song in downvoted_songs])
 
 while True:
-	perform_iteration()
+	try:
+		perform_iteration()
+	except Exception, e:
+		logging.exception(e)
+	
 	time.sleep(60 * 60 * HOURS_INTERVAL)
