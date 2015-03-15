@@ -14,6 +14,6 @@ your_password
 
 To use it, run:
 ```
-python google_play_music_cleaner.py
+python google_play_music_cleaner.py &
 ```
 
