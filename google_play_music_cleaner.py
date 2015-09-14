@@ -14,7 +14,7 @@ api = Mobileclient()
 global last_login_data
 global logged_in
 last_login_data = open(CONFIG_FILE_NAME).read().split("\n")
-logged_in = api.login(last_login_data[0], last_login_data[1])
+logged_in = api.login(last_login_data[0], last_login_data[1], Mobileclient.FROM_MAC_ADDRESS)
 
 # This procedure will perform a clean process
 def perform_iteration():
@@ -40,7 +40,7 @@ def perform_iteration():
 		return
 	
 	all_songs = api.get_all_songs()
-	downvoted_songs = [song for song in all_songs if song["rating"]  == RATING_DOWNVOTE]
+	downvoted_songs = [song for song in all_songs if song["rating"] == RATING_DOWNVOTE]
 	
 	if len(downvoted_songs) == 0:
 		logging.info("No downvoted songs")
