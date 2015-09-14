@@ -16,7 +16,7 @@ global logged_in
 last_login_data = open(CONFIG_FILE_NAME).read().split("\n")
 logged_in = api.login(last_login_data[0], last_login_data[1], Mobileclient.FROM_MAC_ADDRESS)
 
-# This procedure will perform a clean process
+# This procedure will perform the iterative process
 def perform_iteration():
 	global last_login_data
 	global logged_in
