@@ -28,7 +28,7 @@ def perform_iteration():
 	if last_login_data != curr_login_data:
 		last_login_data = curr_login_data
 		api.logout()
-		logged_in = api.login(curr_login_data[0], curr_login_data[1])
+		logged_in = api.login(curr_login_data[0], curr_login_data[1], Mobileclient.FROM_MAC_ADDRESS)
 	
 	logging.info("Started iteration")
 	#print "--"
