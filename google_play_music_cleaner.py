@@ -3,12 +3,13 @@ import sys
 from datetime import datetime
 import time
 import logging
+import os
 
 # CONSTANTS
 RATING_DOWNVOTE = "1"
-CONFIG_FILE_NAME = ".google_play_music_cleaner_config"
+CONFIG_FILE_NAME = os.path.join(os.path.abspath(os.path.dirname(__file__)), ".google_play_music_cleaner_config")
 
-logging.basicConfig(filename='log.txt',level=logging.INFO, format="%(asctime)s %(levelname)s %(module)s %(message)s", datefmt='%Y-%m-%d %H:%M:%S %Z')
+logging.basicConfig(filename=os.path.join(os.path.abspath(os.path.dirname(__file__)), 'log.txt'),level=logging.INFO, format="%(asctime)s %(levelname)s %(module)s %(message)s", datefmt='%Y-%m-%d %H:%M:%S %Z')
 api = Mobileclient()
 
 
