@@ -1,1 +1,1 @@
-gmusicapi==6.0.0
+gmusicapi==11.0.2
