@@ -1,0 +1,7 @@
+version: "3"
+services:
+  app:
+    build: .
+    volumes:
+      - ./log.txt:/app/log.txt
+      - ./.google_play_music_cleaner_config:/app/.google_play_music_cleaner_config
