@@ -1,6 +1,7 @@
 from gmusicapi import Mobileclient
 from os.path import join, dirname, abspath
 from datetime import datetime
+from logging.handlers import RotatingFileHandler
 import sys
 import time
 import logging
