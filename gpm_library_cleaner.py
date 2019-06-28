@@ -24,18 +24,18 @@ api = Mobileclient()
 
 
 with open(CONFIG_FILE_NAME) as conf_file:
-	username, password = conf_file.read().split("\n")[:2]
-	if not api.login(username, password, Mobileclient.FROM_MAC_ADDRESS):
-		logging.error("Error: could not log in.")
-		sys.exit(1)
+    username, password = conf_file.read().split("\n")[:2]
+    if not api.login(username, password, Mobileclient.FROM_MAC_ADDRESS):
+        logging.error("Error: could not log in.")
+        sys.exit(1)
 
 all_songs = api.get_all_songs()
 downvoted_songs = [song for song in all_songs if song["rating"] == RATING_DOWNVOTE]
 
 if len(downvoted_songs) == 0:
-	logging.info("No downvoted songs")
+    logging.info("No downvoted songs")
 else:
-	logging.info("Deleting %s downvoted songs:", len(downvoted_songs))
-	for song in downvoted_songs:
-		logging.info("%s - %s", song["artist"], song["title"])
-	api.delete_songs([song["id"] for song in downvoted_songs])
+    logging.info("Deleting %s downvoted songs:", len(downvoted_songs))
+    for song in downvoted_songs:
+        logging.info("%s - %s", song["artist"], song["title"])
+    api.delete_songs([song["id"] for song in downvoted_songs])
