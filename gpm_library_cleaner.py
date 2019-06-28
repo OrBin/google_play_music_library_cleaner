@@ -8,7 +8,7 @@ import logging
 import os
 
 RATING_DOWNVOTE = "1"
-CONFIG_FILE_NAME = join(dirname(abspath(__file__)), "google_play_music_cleaner_config.txt")
+CONFIG_FILE_NAME = join(dirname(abspath(__file__)), "config.txt")
 LOGS_DIR_PATH = join(dirname(abspath(__file__)), 'logs')
 LOG_FILE_NAME = join(LOGS_DIR_PATH, 'gpm_library_cleaner.log')
 
