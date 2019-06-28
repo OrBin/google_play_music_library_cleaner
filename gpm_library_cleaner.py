@@ -8,8 +8,18 @@ import os
 # CONSTANTS
 RATING_DOWNVOTE = "1"
 CONFIG_FILE_NAME = os.path.join(os.path.abspath(os.path.dirname(__file__)), ".google_play_music_cleaner_config")
+LOGS_DIR_PATH = join(dirname(abspath(__file__)), 'logs')
+LOG_FILE_NAME = join(LOGS_DIR_PATH, 'gpm_library_cleaner.log')
 
-logging.basicConfig(filename=os.path.join(os.path.abspath(os.path.dirname(__file__)), 'log.txt'),level=logging.INFO, format="%(asctime)s %(levelname)s %(module)s %(message)s", datefmt='%Y-%m-%d %H:%M:%S %Z')
+# Enable logging
+os.makedirs(LOGS_DIR_PATH, exist_ok=True)
+file_handler = RotatingFileHandler(LOG_FILE_NAME, maxBytes=(1048576 * 5), backupCount=7)
+console_handler = logging.StreamHandler()
+logging.basicConfig(format='%(asctime)s %(levelname)s %(module)s %(message)s',
+                    level=logging.INFO,
+                    handlers=[file_handler, console_handler],
+                    datefmt='%Y-%m-%d %H:%M:%S %Z')
+
 api = Mobileclient()
 
 
