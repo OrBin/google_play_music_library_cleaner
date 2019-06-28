@@ -1,13 +1,13 @@
 from gmusicapi import Mobileclient
-import sys
+from os.path import join, dirname, abspath
 from datetime import datetime
+import sys
 import time
 import logging
 import os
 
-# CONSTANTS
 RATING_DOWNVOTE = "1"
-CONFIG_FILE_NAME = os.path.join(os.path.abspath(os.path.dirname(__file__)), ".google_play_music_cleaner_config")
+CONFIG_FILE_NAME = join(dirname(abspath(__file__)), "google_play_music_cleaner_config.txt")
 LOGS_DIR_PATH = join(dirname(abspath(__file__)), 'logs')
 LOG_FILE_NAME = join(LOGS_DIR_PATH, 'gpm_library_cleaner.log')
 
@@ -21,7 +21,6 @@ logging.basicConfig(format='%(asctime)s %(levelname)s %(module)s %(message)s',
                     datefmt='%Y-%m-%d %H:%M:%S %Z')
 
 api = Mobileclient()
-
 
 with open(CONFIG_FILE_NAME) as conf_file:
     username, password = conf_file.read().split("\n")[:2]

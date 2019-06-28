@@ -3,5 +3,5 @@ services:
   app:
     build: .
     volumes:
-      - ./log.txt:/app/log.txt
-      - ./.google_play_music_cleaner_config:/app/.google_play_music_cleaner_config
+      - ./logs:/app/logs
+      - ./google_play_music_cleaner_config.txt:/app/google_play_music_cleaner_config.txt
